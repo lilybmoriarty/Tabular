@@ -10,6 +10,7 @@ chrome.tabs.query({ currentWindow: true }, function(tabs) {
 });
 
 function buildOpenURLList(divName, list) {
+  console.log("this is list", list);
   let listDiv = document.getElementById(divName);
 
   for (let i = 0; i < list.length; i++) {
@@ -47,10 +48,16 @@ function groupByDomain(list) {
 }
 
 function openUniqueTabs(obj) {
-  console.log("do i go in here?");
-  console.log("this is obj", obj);
   for (let key in obj) {
-    console.log("is this happening?");
-    chrome.tabs.create({ url: "/domainlist.html", active: false });
+    chrome.tabs.create({ url: "/domainlist.html", active: false }, tab => {
+      //this is adding all of the keys to local storage, i need a way to be able to have a page load the information for just a single key
+      console.log("this is tab.index", tab.index);
+      console.log("this is key", key);
+      console.log("this is { key: obj[key] }", { [key]: obj[key] });
+      let tabNum = tab.index;
+      let domain = { [key]: obj[key] };
+      console.log("this is domain", domain);
+      localStorage.setItem(tabNum, JSON.stringify(domain));
+    });
   }
 }
