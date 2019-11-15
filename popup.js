@@ -16,5 +16,5 @@
 
 let mergeButton = document.getElementById("merge");
 mergeButton.onclick = function(element) {
-  chrome.tabs.create({ url: "http://www.google.com/", active: false });
+  chrome.tabs.create({ url: "/tablist.html", active: false });
 };
