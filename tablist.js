@@ -49,8 +49,8 @@ function groupByDomain(list) {
 function openUniqueTabs(obj) {
   console.log("do i go in here?");
   console.log("this is obj", obj);
-  // for (let key in obj) {
-  //   console.log("is this happening?");
-  //   chrome.tabs.create({ url: "/tablist.html", active: false });
-  // }
+  for (let key in obj) {
+    console.log("is this happening?");
+    chrome.tabs.create({ url: "/domainlist.html", active: false });
+  }
 }
