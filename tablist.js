@@ -1,6 +1,5 @@
 // Given an array of URLs, build a DOM list of those URLs in the
 // browser action popup.
-console.log("do i run??!?!!?!?!?!??!");
 
 chrome.tabs.query({ currentWindow: true }, function(tabs) {
   let allTabs = [...tabs];
@@ -10,7 +9,6 @@ chrome.tabs.query({ currentWindow: true }, function(tabs) {
 });
 
 function buildOpenURLList(divName, list) {
-  console.log("this is list", list);
   let listDiv = document.getElementById(divName);
 
   for (let i = 0; i < list.length; i++) {
@@ -51,13 +49,9 @@ function openUniqueTabs(obj) {
   for (let key in obj) {
     chrome.tabs.create({ url: "/domainlist.html", active: false }, tab => {
       //this is adding all of the keys to local storage, i need a way to be able to have a page load the information for just a single key
-      console.log("this is tab.index", tab.index);
-      console.log("this is key", key);
-      console.log("this is { key: obj[key] }", { [key]: obj[key] });
-      let tabNum = tab.index;
-      let domain = { [key]: obj[key] };
-      console.log("this is domain", domain);
-      localStorage.setItem(tabNum, JSON.stringify(domain));
+      let tabNum = tab.id;
+      let domain = obj[key];
+      localStorage.setItem(tabNum, domain);
     });
   }
 }
