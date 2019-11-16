@@ -5,6 +5,8 @@ chrome.tabs.getCurrent(tab => {
   buildOpenURLList("domain-list", list);
 });
 
+// should try to refactor to pass the URLs and also the titles, currently only able to render the URL link on the 'domain tab'
+
 function buildOpenURLList(divName, list) {
   let listDiv = document.getElementById(divName);
 
